@@ -1,0 +1,12 @@
+15. Demo and Start Click Counter
+App
+
+npx create-react-app clicker
+
+16. Set up Enzyme and Write Tests
+
+remove react-dom and add enzyme {shallow}
+import adapter
+configure enzyme with the adapter
+- just letting enzyme know that we are going to use react 16
+- that is what it is going to take as raw material to create react DOM 

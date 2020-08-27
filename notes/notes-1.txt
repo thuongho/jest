@@ -1,0 +1,148 @@
+better organization
+more maintainable
+fewer bugs
+
+3 TDD
+shell version of the code
+-> write test
+-> tests fail
+
+why TDD
+- more efficient
+-- manual tests takes time and effort
+- better code
+-- plan before you code
+-- better organized
+-- more testable (caught sooner, regression)
+- great code coverage
+
+4 create-react-app
+npm package
+- creates react apps
+-- webpack
+-- web server
+
+npx
+- download the latest version of create-react-app template every time
+- not dependatnt on when u last installed
+- comes with npm 5.2+ and higher
+
+npx create-react-app demo
+
+7 create-react-app demo
+test react-scripts
+- underneath the hood is just jest
+
+8. More about Jest Watch Mode,
+Test Files and Test
+watch mode
+- watch for changes since last commit
+
+jest tests
+- by default will look for .test.js in the src folder
+
+9. Enzyme Introduction and Setup
+enzyme vs react DOM
+- enzyme has better toolkit
+- search through DOM with jQuery style selectors
+- simulate simple events
+
+enzyme
+- creates a virtual DOM 
+- allows testing without a browser
+- access to props and state
+-- manipulate values
+-- examine / test for values
+
+shallow rendering
+- render components only one level deep
+- render parent, but uses placeholder for children
+- simpler and isolated
+
+shallow vs mount
+- shallow renders component and adds placeholder for children
+- mount will render component and the children
+
+npm i --save-dev enzyme jest-enzyme enzyme-adapter-react-16
+- tells enzyme which version of react we will be using for testing
+
+App.test.js
+import Enzyme from 'enzyme'
+import EnzymeAdapter from 'enzyme-adapter-react-16'
+
+Enzyme.configure({ adapter: new EnzymeAdapter })
+
+10. Using Enzyme in a Test
+import Enzyme, { shallow } from 'enzyme'
+
+test('', () => {
+  // returns a wrapper
+  const wrapper = shallow(<App />)
+})
+
+.debug
+- returns the dom as a string
+wrapper.debug()
+
+expect
+- throw an error when assertion is false so that the test fails
+
+11. Types of Tests
+unit tests
+- tests one piece of code 
+
+integration tests
+- how multiple units work together
+
+acceptance / e2e
+- how would a user interact with app
+
+12. Testing Tradeoffs
+test behavior not implementation
+- ideally we do not want to re-write tests after a refactor
+- when writing tests, write about test behaviors (what the app should do)
+-- instead of implementation (how it works)
+-- if implementation changes or code refactor, it should still work
+-- implementation is brittle
+
+example
+testing a click counter
+testing a behavior
+- set initial state
+- simulate button click
+- check displayed count to see that it was incremented by one
+- this is testing the behavior that the user sees
+testing implementation
+- set initial state
+- simulate button click
+- check to see if particular function was called
+- this is testing to see if the code go through the correct stages to cause the behavior
+
+why brittle?
+- testing implementation (function name) not behavior (display update)
+
+testing goal #2
+easy diagnosis of failing tests
+- we dont want to spend a lot of time digging through the code to figure out where the bug is
+
+balance / tradeoffs
+granular (unit) testing leads to...
+- ease of diagnosis
+- brittle tests
+broader (integration) testing leads to...
+- more robust tests
+- more difficult to find out what caused failure
+
+art not a science
+- find the balance of the two
+
+13. Why There is no Snapshot
+Testing in this Course
+jest includes snapshot testing
+
+no TDD with snaphots
+brittle
+- it breaks so frequently
+- too easy to ignore failure and update
+no test intent
+- if there's a failure, does test still meet spec
