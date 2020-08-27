@@ -10,3 +10,48 @@ import adapter
 configure enzyme with the adapter
 - just letting enzyme know that we are going to use react 16
 - that is what it is going to take as raw material to create react DOM 
+
+Enzyme.configure({ adapter: new EnzymeAdapter() })
+
+renders without an error
+- good basic test for any component
+
+test anything that is critical to the app
+core to the app
+renders increment button
+
+renders counter display
+
+test the state
+counter starts at 0
+
+functionality
+clicking button increments counter display
+
+17. Test Component Rendering
+
+React is moving towards functional components and using hooks and context instead of state
+
+convert functional component into a class component
+- use data test attribute
+- we want to make sure that this attribute is here for testing and that it should not be changed
+
+<div data-test=""></div>
+
+enzymejs docs
+api reference
+shallow rending api
+find selector
+EnzymeSelector
+css or jquery syntax
+use attribute syntax
+
+renders without error
+- get wrapper
+- wrapper.find attribute
+- assert
+-- expect length to be 1
+-- expecting to find one element
+- selector standard naming component
+- component-name-of-component
+- component-app
