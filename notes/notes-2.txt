@@ -55,3 +55,108 @@ renders without error
 - selector standard naming component
 - component-name-of-component
 - component-app
+
+18. OPTIONAL: Removing data-test
+Attributes for Production
+
+npm i --save-dev babel-plugin-react-remove-properties
+npm run eject
+- takes the config and make it editable by us
+- it doesn't change anything except makes the configs manageable by us
+
+go to babel-plugin-react-remove-properties site
+package.json
+"babel": {
+  "env": {
+    "production": {
+      "plugins": [
+        ["react-remove-properties", {"properties": ["data-test"]}]
+      ]
+    },
+    "presets": [
+      "react-app"
+    ]
+  }
+}
+
+npm run build
+
+recap
+install babel-plugin-react-remove-properties
+npm run eject
+update babel config (could be babelrc)
+create production build
+
+19. More data-test Attribute Tests
+
+copy and paste wrapper and data-attribute for:
+// Core to the app
+test('renders increment button', () => {});
+
+test('renders counter display', () => {});
+
+// Test state
+test('counter starts at 0', () => {});
+
+App.js
+- add h1
+- add button
+
+20. DRY Refactor
+
+setup function that takes props and state
+JS Doc
+/**
+ * Factory function to create ShallowWrapper for the App component.
+ * @function setup
+ * @param {object} props - Component props specific to this setup.
+ * @param {any} state - Initial state for setup.
+ * @returns {ShallowWrapper}
+*/
+const setup = (props={}, state=null)
+
+/**
+ * Return ShallowWrapper containing node(s) with the given data-test value.
+ * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within.
+ * @param {string} val - Value of data-test attribute for search.
+ * @returns {ShallowWrapper}
+*/
+findByTestAttr = (wrapper, val)
+
+21. Test Initial State
+manipulate state
+jest docs
+shallow api
+setState(nextState[, callback])
+- nextState
+- set state
+state([key])
+- investigate what the state is
+
+counter starts at 0
+plan
+- create a shallow wrapper
+- see what the state is for the counter
+initialCounterState = wrapper.state('counter')
+
+22. Test Button Click
+set initial state
+7 - 8
+click on button using ezyme simulate
+check display
+
+setup
+if (state) wrapper.setState(state)
+
+clicking button increments counter display
+counter starts at 7
+wrapper setup(null, { counter})
+
+// find button and click
+button.simulate('click')
+
+// find display and test value
+counterDisplay
+counterDisplay.text() toContainer(counter + 1)
+
+23. Acceptance Testing and Review
