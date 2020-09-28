@@ -1,3 +1,6 @@
+Intro
+
+write code that is
 better organization
 more maintainable
 fewer bugs
@@ -46,8 +49,10 @@ enzyme vs react DOM
 - enzyme has better toolkit
 - search through DOM with jQuery style selectors
 - simulate simple events
+-- you can blur an element
 
 enzyme
+- a tool that
 - creates a virtual DOM 
 - allows testing without a browser
 - access to props and state

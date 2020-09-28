@@ -28,7 +28,7 @@ counter starts at 0
 functionality
 clicking button increments counter display
 
-17. Test Component Rendering
+17. Test Component Rendering (OLD)
 
 React is moving towards functional components and using hooks and context instead of state
 
@@ -42,6 +42,8 @@ enzymejs docs
 api reference
 shallow rending api
 find selector
+.find(selector) => ShallowWrapper
+- find every node in the render tree of the current wrapper that matches the provided selector
 EnzymeSelector
 css or jquery syntax
 use attribute syntax
@@ -56,7 +58,26 @@ renders without error
 - component-name-of-component
 - component-app
 
-18. OPTIONAL: Removing data-test
+17 data-test Attributes
+add data-test attribute to the top level of component
+- target this element with specific
+
+Why use data-test attribute
+- id and class have uses in production app
+-- might get change in the future
+- data-test attribute, everyone knows it is only for testing
+- conventional name data-test
+- can remove in production
+
+wrapper.find takes the selector to find the node and returns a wrapper
+
+18 First data-test Attribute TEst
+kabob case is using the -
+component-app
+wrapper.find(selector)
+- expect it to find exactly one component
+
+19. OPTIONAL: Removing data-test
 Attributes for Production
 
 npm i --save-dev babel-plugin-react-remove-properties
@@ -87,7 +108,7 @@ npm run eject
 update babel config (could be babelrc)
 create production build
 
-19. More data-test Attribute Tests
+20. More data-test Attribute Tests
 
 copy and paste wrapper and data-attribute for:
 // Core to the app
@@ -102,7 +123,7 @@ App.js
 - add h1
 - add button
 
-20. DRY Refactor
+21. DRY Refactor
 
 setup function that takes props and state
 JS Doc
@@ -123,7 +144,13 @@ const setup = (props={}, state=null)
 */
 findByTestAttr = (wrapper, val)
 
-21. Test Initial State
+22. Strategies and Design Decisions
+One assertion/expect per test
+- test descriptions provide better documentation
+- failure counts give better indication of state of code
+-- test stops at first failure, it's not even going to run the other assertions
+
+23. Test Initial State (OLD)
 manipulate state
 jest docs
 shallow api
@@ -139,7 +166,8 @@ plan
 - see what the state is for the counter
 initialCounterState = wrapper.state('counter')
 
-22. Test Button Click
+24. Test Button Click
+
 set initial state
 7 - 8
 click on button using ezyme simulate
@@ -159,4 +187,12 @@ button.simulate('click')
 counterDisplay
 counterDisplay.text() toContainer(counter + 1)
 
-23. Acceptance Testing and Review
+25. Acceptance Testing and Review
+
+26. Click Counter Challenges
+decrement counter
+don't let the count go below zero
+- display an error message saying the counter can't go below zero
+clear the error on increment button click
+
+solution at click-counter-challenges/click-counter
