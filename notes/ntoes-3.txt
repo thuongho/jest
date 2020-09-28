@@ -1,2 +1,96 @@
 Jotto Intro and Congrats Component
 
+28 Jotto App Demo
+word game
+thinks of a 5 letter word
+tells how many letter you have in common
+
+29 Jotto App Planning
+Architecture
+Title
+input box and button
+
+components
+App
+- title, contains children components
+
+input
+- input box and submit button
+
+guessedwords
+- table of guessed words
+
+Congrats
+- congratulations message
+
+secret word
+- comes from api server
+- server code
+https://github.com/bonnie/udemy-react-testing-projects
+
+30 Jotto App Plan of Attack
+start with congrats and guessed words components
+
+testing with props
+- hooks/context: replace props with context
+
+setup common test tools
+
+31 Set up Jotto App and Congrats Component
+
+yarn add enzyme jest-enzyme enzyme-adapter-react-16 --dev 
+
+src/Congrats.js
+- receive props success (boolean)
+src/Congrats.test.js
+- Enzyme, {shallow}
+EnzymeAdapter
+
+import Congrats
+Enzyme.configure({ adapter: new EnzymeAdapter() })
+
+32 Congrats Component Test Setup
+render without error
+renders no text when `success` prop is false
+renders non-empty congrats message when `success` prop is true
+- keep it generic without saying what the text is
+
+create setup function that take props={}
+return shallow(<Congrats {...props})
+
+evaluate
+if props = { success: true }
+<Congrats sucess=true />
+
+test/testUtils
+/**
+ * Return node(s) with the given data-test attribute.
+ * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper.
+ * @param {string} val - Value of data-test attribute for search.
+ * @returns {ShallowWrapper}
+ */
+export const findByTestAttr = (wrapper, val) => {
+  return wrapper.find(`[data-test=${val}]`);
+}
+
+33 Congrats Test and the .text() Method
+Congrats component
+- child of app component
+- app is connected to component
+-- access to success state
+- receives success as prop
+
+renders without error
+- setup
+- find component data-test='component-congrats'
+- expect length
+
+renders no text when success prop is false
+wrapper success: false
+find component.text()
+expect toBe ''
+
+renders non-empty congrats
+wrapper success: true
+find component.text()
+expect no tobe 0
