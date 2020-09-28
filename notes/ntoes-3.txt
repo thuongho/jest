@@ -1,0 +1,2 @@
+Jotto Intro and Congrats Component
+
