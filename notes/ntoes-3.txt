@@ -94,3 +94,43 @@ renders non-empty congrats
 wrapper success: true
 find component.text()
 expect no tobe 0
+
+34 Code the Congrats Component
+
+35 PropTypes testing
+PropTypes are a great way to validate all the data of your props
+- its also a good way to document
+
+yarn add prop-types
+- throws a warning if the type is not correct
+
+yarn add check-prop-types --dev
+- returns an error on propTypes
+
+does not throw warning with expected props
+expectedProps = { success: false }
+propError = checkPropTypes(Congrats.propTypes, expectedProps, 'prop', Congrats.name)
+- well get the error instead of thrown as a warning
+expect propError toBeUndefined()
+
+testUtils
+import checkPropTypes
+
+export const checkProp = (component, conformingProps) => {
+  const propError = checkPropTypes(
+    component.propTypes,
+    conformingProps,
+    'prop',
+    component.name
+  )
+  expect(propError).toBeUndefined()
+}
+
+36 Code PropTypes and Update Tests
+must give functional component a name and export it
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired
+}
+
+37 Default Props in setup
