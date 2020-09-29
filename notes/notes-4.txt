@@ -1,0 +1,67 @@
+GuessedWords Component
+
+42 Set up GuessedWords Component and Test
+display users guesses and how many letters the users guessed correctly
+
+Array of objects with the shape
+[
+  {guessedWord: 'train', letterMatchCount: 3},
+  {guessedWord: 'agile', letterMatchCount: 1}
+]
+- receive via context
+
+GuessedWords.js & test
+React
+PropTypes
+
+GuessedWords.propTypes = {
+
+}
+
+43 GuessedWords PropTypes and setup()
+defaultProps
+[{guessedWords}]
+
+setup
+setupProps = {...defaultProps, ...props}
+return shallow(<)
+
+does not throw warning with expected props
+checkProps(GuessedWords, defaultProps)
+- checking to see no errors are return from defaultProps
+
+// GuessedWords.js
+GuessedWords.propTypes = {
+  guessedWords: PropTypes.arrayOf(
+    PropTypes.shape({
+      guessedWord: PropTypes.string.isRequired,
+      letterMatchCount: PropTypes.number.isRequired
+    })
+  ).isRequired
+}
+
+44 Use `describe` for Context 
+try to guess the secret word
+
+describe
+- grouping of test that allows to pinpoint where the failure is
+if there are no words guessed
+
+if there are words guessed
+
+45 Write TEsts and beforeEach for "no words guessed"
+if there are no words guessed
+
+let wrapper
+beforeEach(() => {
+
+})
+renders without error
+setup { guessedWords: []}
+find component-guessed-words
+toBe(1)
+
+renders instructions to guess a word
+guess-instructions
+
+46 Code for "no words guessed"
