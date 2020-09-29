@@ -134,3 +134,40 @@ Congrats.propTypes = {
 }
 
 37 Default Props in setup
+const defaultProps = { success: false }
+
+const setup = (props={})
+// use defaultProps and override if new props are passed in
+const setupProps = { ...defaultProps, ...props}
+return shallow(<Congrats {...setupProps})
+
+38 Move Enzyme Configuration to setupTests.js
+refactor 
+create react app is looking for src/setupTest.js
+- configuration file
+Enzyme.configure({ adapter: new EnzymeAdapter() });
+
+40 Summary of Abstractions
+useful functions in testUtils
+findByTestAttr 
+- find selector with test attribute
+checkProps
+- check propTypes to make sure it is the correct prop type
+
+move ezyme adapter in setupTests.js
+
+caution
+- too many abstractions = hard-to-read tests
+
+41 Playing th Long game
+extra time to build the app will save in the long run
+planning ahead of time = fewer false starts
+saving time over manual testing
+- auto test finds a bug, cost nothing to run them again
+auto regression testing
+- cost nothing to rerun the code
+
+well planned
+easier to maintain
+fewer bugs
+happy customers
