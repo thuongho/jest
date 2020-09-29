@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+import Congrats from './Congrats';
+import GuessedWords from './GuessedWords';
+
 function App() {
+  const [success, setSuccess] = useState(true);
+  const [guessedWords, setGuessedWords] = useState([
+    { guessedWord: 'train', letterMatchCount: 1 }
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h1>Jotto Game</h1>
+      <Congrats success={success} />
+      <GuessedWords guessedWords={guessedWords} />
     </div>
   );
 }

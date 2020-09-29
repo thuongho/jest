@@ -83,3 +83,15 @@ guessedWordsNodes
 length to be the same as guessedWords
 
 48 Code for "nonzero guessed words"
+
+49 Manual Acceptance Testing
+Update App
+import GuessedWords
+import Congrats
+
+50 Bootstrap Styling
+table table table-sm
+thead thead-light
+
+congrats
+alert alert-success
