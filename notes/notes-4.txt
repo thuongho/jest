@@ -65,3 +65,21 @@ renders instructions to guess a word
 guess-instructions
 
 46 Code for "no words guessed"
+
+47 TEsts for "nonzero guessed words"
+if there are words guessed
+guessedWords = []
+beforeEach
+wrapper = setup({ guessedWords})
+renders without error
+find component-guessed-words
+
+renders "guessed words" section
+guessedWordsNode find guessed-words
+
+correct number of guessed words
+- if there are 3 words correct, it should show 3 words
+guessedWordsNodes
+length to be the same as guessedWords
+
+48 Code for "nonzero guessed words"
