@@ -95,3 +95,19 @@ thead thead-light
 
 congrats
 alert alert-success
+
+51 getLetterMatchCount Helper Function
+determine how many letters a guess has in common with the secret word
+
+src/helpers
+index
+getLetterMatchCount
+
+index.test
+import getLetterMatchCount
+
+describe('getLetterMatchCount')
+const secretWord = 'party'
+returns correct count when there are no matching letters
+returns the correct count where there are 3 matching letters
+retusn correct count when there are duplicate letters in the guess
