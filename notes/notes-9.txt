@@ -1,0 +1,88 @@
+Hooks and Context Intro
+
+100 Intro to Hooks
+hooks introduced with React 16.8.0 and above
+
+at the time of this course, Enzyme hooks support is not mature
+
+allow state and lifecycle events in functional components
+easier to reuse code amont components
+
+101 Intro to Context
+stable release in 16.3
+
+Context is used for
+- Global settings (language, visual theme)
+- the components need access to global settings
+- deeply nested components that needs access but ancestors don't
+
+Language context
+- components need access to language to know what language to display
+
+Jotto-specific state
+- whether the word has been guessed successfully
+
+Using a Context
+- components that use a context need to be wrapped in a provider
+- the context value is passed to the provider as a prop
+- whenever the value changes, the provider will update children so that the children can re-render
+- value can be local state for parent component
+- or it can be pattern to embed state into context (custom hook)
+
+102 Setting up Jotto for Hooks and Context
+
+103 Jotto Data Flow with Hooks and Context
+
+App
+- local state
+-- secretWord
+-- language
+
+LanguageProvider
+LanguagePicker component
+- setLanguage prop
+- language context (get)
+- pass language state to LanguagePicker as a prop
+
+SuccessProvider
+Congrats component
+language context (get)
+- so it knows what to display
+success context (get)
+- display success message or not
+
+GuessedWordsProvider
+- nested within the SuccessProvider
+Input
+- secretWord prop
+- success context (get/set)
+- language context (get)
+- currentGuess state
+- guessedWords context (get/set)
+GuessedWords
+- language context (get)
+- guessedWords context (get)
+
+104 Jotto Hooks and Context Plan of Attack
+Create simple App and Input components
+setState hook
+- State controlled field in Input (currentGuess)
+useEffect hook
+- getSecretWord on App mount from random word server
+Context using value prop
+- language context (using App-level state)
+Context with embedded state
+- embeds the state into the provider
+- success
+- GuessedWords
+
+105 Basic App Component
+App.test
+- shallow
+findByTestAttr
+Setup function for app component.
+@returns {ShallowWrapper}
+setup
+- return shallow 
+App renders without error
+find component-app
