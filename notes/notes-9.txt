@@ -86,3 +86,8 @@ setup
 - return shallow 
 App renders without error
 find component-app
+
+106 Code Quiz! Basic Input Component
+Create input.js and test
+functional component with return value
+- empty div with data-test attribute
