@@ -91,3 +91,48 @@ find component-app
 Create input.js and test
 functional component with return value
 - empty div with data-test attribute
+
+107 Input Props
+props arg 
+- destructure secretWord
+- not do anything with the secret word yet, just testing prop with correct type
+define proptypes for Input component
+after requiring props, render test will throw a warning
+update shallow arg to pass a prop for secretWord
+use checkProps from testUtils
+
+108 Jest Mocks
+what is mock function
+- fake function that runs a fake function instead of real function
+- can run alt code or just act as a placeholder
+
+Jest replaces real function with mock
+
+Can assert 
+- how many time smock ran during tests
+- with what arguments
+
+Redux spied on mock functions
+here well sometimes make replacement functions
+- replacement functions will return values
+
+mocks serve 3 purposes
+- keep real function from running
+-- prevents side-effects like network calls
+- spy on function to see when it's called
+-- when it called and what arguments
+- provide return values
+-- set up test conditions
+
+Warning for mocks in Jest
+reset properties on modules to replace functions with mocks
+
+no destructuring on imports in non-test code
+
+this works
+import React 
+const language - React.useContext(LanguageContext)
+
+doesn't work
+import {useContext}
+const language - useContext(LanguageContext)
