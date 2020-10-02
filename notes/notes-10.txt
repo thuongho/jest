@@ -1,0 +1,62 @@
+Testing REact Hooks
+
+109 Prepare Input for Writing setState TEsts
+currentGuess
+- local state for Input
+- no other components need it 
+update guessedWord context
+check currentGuess against secretWord
+clear currentGuess state on submit
+
+input.js
+form className form-inline
+input data-test input-box
+classname mb-2 mx-sm-3
+type text
+placeholder enter guess
+
+button
+data-test submit-button
+className btn btn-primary mb-2
+Submit
+
+implment useState hooks
+currentGuess, setCurrentGuess React.useState
+
+110 State-controlled field
+describe('state controlled input field)
+state updates with value of input box upon change
+create a function to watch currentGuess
+const mockSetCurrentGuess = jest.fn();
+- don't care about return value, just care about useState return this as the second item
+React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+- replaces useState of the Input component and return our mock
+
+wrapper
+inputBox 'input-box'
+
+simulate input
+make a mockEvent = {target: { value: 'train'}}
+apply event to change simulation on inputBox
+inputBox.simulate('change', mockEvent);
+
+expect mockSetCurrentGuess toHaveBeenCalledWith('train')
+
+update input
+
+111 Clear currentGuess on Submit
+write tests that setCurrentGuess gets called
+- with an empty string
+- when submit button is clicked
+
+onClic attribute for submit button
+
+write TODO comments in onClick of submit
+- update guessedWords context
+- check against secretWord and optionally update success context
+
+add preventDefault
+- get error
+input.test
+submitButton.simulate('click', { preventDefault() {}});
+- pass in event
