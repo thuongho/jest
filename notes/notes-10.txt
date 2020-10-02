@@ -162,3 +162,73 @@ expect mockSetSecretWord toHaveBeenCalledWith secretWord
 114 Code getSecretWord
 response axios.get('http://localhost:3030')
 setSecretWord(response.data)
+
+115 Intro to useEffect and How to test with Enzyme
+useEffect
+runs function on component reload
+by default runs on every reload
+[] run only on mount
+
+how to test?
+mock getSecretWord
+mock shoudl called on App mount 
+mock should not get called on App update
+
+use mount
+useEffect not called on shallow
+- enzyme issue on shallow
+- when this is fixed, can use shallow instead of mount in setup
+set up mock in setup
+- scope mock globally
+clear mock in setup
+- mocks tracks call cumulatively until reset
+
+116 Test getSecretWord is called on App mount
+App.test.js
+mount
+ReactWrapper instead of ShallowWrapper
+
+import hookActions
+mockGetSecretWord = jest.fn()
+
+setup
+mockGetSecretWord.mockClear()
+hookActions.getSecretWord = mockGetSecretWord
+// use mount, cuz useEffect not called on shallow (enzyme issue 2086)
+return mount(<App />)
+
+describe('getSecretWord calls)
+getSecretWord gets called on App mount
+setup
+// check to see if secret word was udpated
+mockGetSecretWord toHaveBeenCalled
+
+117 useReducer Hook: what and why
+state
+secretWord
+language
+
+useState
+- brittle on multiple state
+- don't want to run useState 2x
+
+useReducer
+[state, dispatch] = React.useReducer(reducer, initialState)
+dispatch function updates state
+dispatch(action) -> reducer(state, action)
+- sends action and state to reducer
+- conventionally, action is object with 2 properties:
+-- type 
+-- payload
+reducer runs a switch on type
+- whichever type it matches, reducer will use payload to update state
+allows us to make functions to update a single key (setSecretWord)
+- cleaner functions
+- dont have to pass state as an argument explicitly
+
+118 Code useEffect and useReducer to Pass Test
+set up state with useReducer hook
+function reducer(state, action) {
+  it'll look like 
+  { type: 'setSecreteWord', payload: 'party'}
+}
