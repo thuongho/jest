@@ -60,3 +60,105 @@ add preventDefault
 input.test
 submitButton.simulate('click', { preventDefault() {}});
 - pass in event
+
+112 Plan for Testing getSecretWord
+load secretWord when app mounts
+- test axios
+
+actions/hookActions.js
+- make a function that takes setSecretWord as a param
+- function will get secret word from random word server
+- run setSecretWord wiith result
+- export object from hookActions
+- using axios and moxios
+
+watch moxios: Why an dHow lecture in Testing Axios section
+
+81 Moxios: why and how
+we don't want to test server when testing app
+
+using moxios lets us test app
+- without testing server
+- without even running server
+
+test installs moxios
+- axios will now send requests to moxios instead of http
+- test specifies moxios response
+
+test -> action creator -> axios -> moxios !== http
+- test calls action creator 
+- action creator calls axios
+-- axios uses moxios instead of http for request
+- action creator receives moxios response from axios that we specifies in the tests
+
+moxios syntax
+test calls moxios.install()
+- sets moxios as the axios adapter
+- routes any axios request to moxios instead of http
+
+can pass axios instance to moxios.install()
+- it will use the configured settings
+- leave param blank for default settings
+
+call moxios.wait() during test
+- it watches for axios calls
+- sends response using callback passed to .wait()
+moxios.wait(() => {
+  const request = moxios.requests.mostRecent();
+  request.respondWidth({
+    status: 200,
+    response: secretWord
+  });
+});
+
+113 Test getSecretWord
+yarn add axios
+yarn add moxios --dev
+src/actions/hookActions.js
+- write shell just to run test but not enough to pass
+
+import axios
+export const getSecretWord = (setSecreteWorld) = {
+
+}
+
+// default export for mocking convenience
+export default {
+  getSecretWord
+}
+
+hookActions.test.js
+import moxios
+import getSecretWord from hookActions
+
+describe('moxios tests')
+beforeEach
+  moxios.install()
+
+afterEach
+  moxios.uninstall()
+  - returns request back to http
+
+calls the getSecretWord callback on axios response, async
+secretWord
+
+moxios.wait
+get mostRecent request
+respondWith
+status 200
+response secretWord
+
+// creat mock for callback arg
+mockSetSecretWord = jest.fn()
+- create this to spy on it
+
+await getSecretWord(mockSetSecretWord)
+- we don't care what we get back
+- we just want to see if it ran
+
+// see whether mock was run with the correct argument
+expect mockSetSecretWord toHaveBeenCalledWith secretWord
+
+114 Code getSecretWord
+response axios.get('http://localhost:3030')
+setSecretWord(response.data)
