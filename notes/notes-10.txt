@@ -232,3 +232,73 @@ function reducer(state, action) {
   it'll look like 
   { type: 'setSecreteWord', payload: 'party'}
 }
+
+119 Test getSecretWord Does NOT Run on App Update
+the word would change on every update so we only want it to run on component mount
+
+not testing REact's useEffect hook works properly
+- that's React's job
+Testing that we're using it properly
+trigger update with Enzyme setProps()
+
+update() doesn't trigger useEffect
+- bug atm issue2254
+
+describe secretWord does not update on App update
+wrapper
+mockClear()
+- mount runs it so we just need to clear first
+
+// wrapper.update() doesn't trigger update
+// issue 2091
+wrapper.setProps();
+
+expect mockGetSecretWord notToHaveBeenCalled()
+
+120 secretWord Prop Warning for Input
+getSecretWord is async so when the app is loaded, the inital state of the secretWord is null
+- let's add a spinner
+
+121 Loading Spinner Planning
+if secretWord is null
+- return spinner
+- otherwise input with secretWord
+
+update setup to take secretWord param
+- mock useState to set value of secret word
+useState retuns an array
+- first item - value of secret word
+- second item - function to set secret word
+mock returns array
+
+mockUseState = jest.fn()
+  .mockReturnValue(
+    [
+      secretWord,
+      jest.fn()
+    ]
+  )
+React.useState = mockUseState;
+
+122 Test Loading Spinner
+App.test
+
+setup accepts secretWord
+
+mockUseReducer
+
+describe secretWord is not null
+beforeEach
+wrapper
+
+renders app when secretWord is not null
+appComponent
+appComponent.exists() toBe true
+
+does not render spinner when secretWord is not null
+spinnerComponent spinner
+exists toBe false
+
+describe secretWord is null
+copy paste above
+
