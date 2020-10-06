@@ -302,3 +302,10 @@ exists toBe false
 describe secretWord is null
 copy paste above
 
+123 Code Loading Spinner
+if (!secretWord)
+div className container data-test spinner
+div spinner-border role=status
+span className sr-only Loading...
+
+p Loading secret word
